@@ -1,0 +1,107 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" href="https://code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
+    <script src="https://code.jquery.com/jquery-1.12.4.js"></script>
+    <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.0/umd/popper.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.7.0/css/all.css"
+        integrity="sha384-lZN37f5QGtY3VHgisS14W3ExzMWZxybE1SJSEsQp9S+oqd12jhcu+A56Ebc1zFSJ" crossorigin="anonymous">
+    <link rel="stylesheet" href="style/styleloginandregister.css">
+
+    <title>Register</title>
+    <style>
+        #Frm1 {
+
+            margin-top: 5% !important;
+            width: 60% !important;
+
+        }
+    </style>
+
+
+</head>
+
+<body>
+    <div class="topnav">
+        <a href="Home.html" style="color: white;"><img width="30px" height="5%" src="img/logo.jpg" class="img">Home</a>
+        <a href="Profile.HTML"> <i class="fas fa-shopping-basket" id="CardshipTap" >Card</i></a>
+        <a href="#contact"></a>
+        <div class="topnav-right">
+            <a href="Login.html">Sign in</a>
+            <a href="Register.html">Sign Up</a>
+        </div>
+    </div>
+
+
+    <form id="Frm1" name="Frm1" class="container card p-3">
+
+        <img id="logo" name="logo" src="img/logo.jpg" width="150" height="100" class="img" >
+
+        <input type="text" class="input" name="fName" id="fName" placeholder="Frist Name" pattern="[A-Z a-z]{3,}"
+            required>
+
+        <input type="text" class="input" name="sName" id="sName" placeholder="Second Name" pattern="[A-Z a-z]{3,}"
+            required>
+
+        <input type="email" class="input" name="mail" id="mail" placeholder="Email Address"
+            pattern="^[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,4}$" required>
+
+        <input type="password" class="input" name="psd" id="psd" placeholder="Password"
+            pattern="^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[@$!%*?&])[A-Za-z\d@$!%*?&]{8,}$" required>
+        <div>
+            <input type="checkbox" id="chPass" onclick="myFunction()"><label for="chPass">Show Password</label>
+        </div>
+        <script>
+            function myFunction() {
+                var Password = document.getElementById("psd");
+                if (Password.type === "password") {
+                    Password.type = "text";
+                } else {
+                    Password.type = "password";
+                }
+            }
+
+
+
+
+        </script>
+        <div class="popup containerPopup" id="divOverLay">
+            <button type="button" class="btnSbmit cancel " onclick="closeForm()">X</button>
+            <h3 class="text">something wrong
+                <br>
+                plz,Check your information
+            </h3>
+        </div>
+        <button type="submit" name="btnSbmit" class="btnSbmit" id="btnSbmit">Register</button>
+
+    </form>
+    <script>
+        $(document).ready(function () {
+
+            $("#btnSbmit").click(function () {
+
+                if ($("#mail").val() == "" || $("#psd").val() == "" || $("#sName").val() == "" || $("#fName").val() == "") {
+
+                    document.getElementById("divOverLay").style.display = "block";
+                }else{
+                    var NewUser={"id":1}
+                    localStorage.setItem("NewUser",)
+                }
+            });
+        });
+
+        function closeForm() {
+            document.getElementById("divOverLay").style.display = "none";
+        }
+
+    </script>
+
+</body>
+
+</html>

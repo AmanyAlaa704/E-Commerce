@@ -1,0 +1,96 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.0/umd/popper.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.7.0/css/all.css"
+        integrity="sha384-lZN37f5QGtY3VHgisS14W3ExzMWZxybE1SJSEsQp9S+oqd12jhcu+A56Ebc1zFSJ" crossorigin="anonymous">
+    <link rel="stylesheet" href="style/styleloginandregister.css">
+    <link rel="stylesheet" href="https://code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
+    <script src="https://code.jquery.com/jquery-1.12.4.js"></script>
+    <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
+
+
+
+</head>
+
+<body>
+    <div id="dialog-form" title="Register">
+        <p class="validateTips">All form fields are required.</p>
+    
+      
+         
+            <form id="Frm1" name="Frm1" class="container card p-3">
+ <fieldset>
+        
+                <input type="text" width="100%" name="fName" id="fName" placeholder="Frist Name" pattern="[A-Z a-z]{3,}"
+                    required>
+        
+                <input type="text"  name="sName" id="sName" placeholder="Second Name" pattern="[A-Z a-z]{3,}"
+                    required>
+        
+                <input type="email" name="mail" id="mail" placeholder="Email Address"
+                    pattern="^[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,4}$" required>
+        
+                <input type="password"  name="psd" id="psd" placeholder="Password"
+                    pattern="^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[@$!%*?&])[A-Za-z\d@$!%*?&]{8,}$" required>
+              
+               
+     </fieldset>        
+            </form>
+     
+       
+      </div>
+    
+      <button id="create-user">Register</button>
+      <div id="showName"></div>
+    <script>
+
+        function addUser() {
+
+            console.log("add user function");
+            console.log($("#user").val());
+            $("#showName").text("welcome ")
+
+            dialog.dialog("close");
+
+        }
+
+        dialog = $("#dialog-form").dialog({
+            autoOpen: false,
+            modal: true,
+            height: 400,
+            width: 350,
+
+            buttons: {
+                Register: function () {
+                    console.log("add user function");
+                    if ($("#mail").val() == "" || $("#psd").val() == "" || $("#sName").val() == "" || $("#fName").val() == "") {
+                        alert("Plz,Entre Full Data")
+                    }else{
+                        var objNewUser={"id":7,"email":$("#mail").val() ,"first_name":$("#fName").val() ,"last_name":$("#sName").val(),"Pass":$("#psd").val()}
+                        
+                        localStorage.setItem('objNewUser', JSON.stringify(objNewUser));
+
+                    }
+                   
+                  //  myDialog.dialog("close");
+
+                },
+               
+            },
+
+        });
+
+        $("#create-user").button()
+            .on("click", function () {
+                dialog.dialog("open");
+            });
+
+    </script>
+</body>

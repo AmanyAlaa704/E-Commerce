@@ -1,0 +1,256 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.0/umd/popper.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.7.0/css/all.css"
+        integrity="sha384-lZN37f5QGtY3VHgisS14W3ExzMWZxybE1SJSEsQp9S+oqd12jhcu+A56Ebc1zFSJ" crossorigin="anonymous">
+    <link rel="stylesheet" href="style/styleloginandregister.css">
+    <link rel="stylesheet" href="https://code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
+    <script src="https://code.jquery.com/jquery-1.12.4.js"></script>
+    <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
+    <style>
+        #buyBtn,
+        #cardBtn {
+            width: 130PX;
+            margin: 10PX;
+            padding: 10px;
+
+        }
+    </style>
+</head>
+
+<body>
+    <script>
+        var objectCard = [];       
+    </script>
+
+    <div class="topnav">
+        <a href="Home.html" style="color: white;"><img width="30px" height="5%" src="img/logo.jpg" class="img">Home</a>
+        <a href="Profile.HTML"> <i class="fas fa-shopping-basket"  >Card</i></a>
+        <a href="#contact"></a>
+        <div class="topnav-right" id="loginNotExist" style="display: block;">
+            <a href="Login.html">Sign in</a>
+            <a href="Register.html">Sign Up</a>
+        </div>
+        <div class="topnav-right" id="loginExist" style="display: none;">
+            <button onclick="location.href='Profile.html'" class="btn btn-dark" id="UserName"
+                style="color: white;"></button>
+
+            <button type="button" id="Out" class="btn btn-dark">Sign Out</button>
+        </div>
+        <div style="margin-top: 10px;margin-right: 10px;margin-left: 0%;">
+            <form action="Search.html">
+                <input type="text" placeholder="Search.." name="search" id="autocomplete">
+                <button type="submit"><i class="fa fa-search"></i></button>
+            </form>
+        </div>
+
+    </div>
+
+    <script>
+        var LoginORNot = localStorage.getItem("LoginID")
+        if (LoginORNot > 0) {
+            document.getElementById("loginNotExist").style.display = "none";
+            document.getElementById("loginExist").style.display = "block";
+
+            $(document).ready(function () {
+                $("#Out").click(function () {
+
+                    localStorage.setItem("LoginID", 0);
+                    location.href = "Home.html"
+                })
+                $.ajax({
+                    url: 'users.json',
+                    dataType: 'json',
+                    contentType: 'json',
+                    type: 'get',
+
+                    success: function (res) {
+
+                        var len = res.data.length;
+                        var flag = 0;
+
+                        for (var index = 0; index < len && flag == 0; index++) {
+                            if (LoginORNot == res.data[index].id) {
+
+                                $("#UserName").text(res.data[index].first_name);
+
+                            }
+                        }
+
+                    },
+                    error: function (xhr) {
+                        console.log(xhr)
+                        console.log(xhr.status + xhr.statusText)
+                    },
+                });
+            });
+
+        } else {
+            document.getElementById("loginNotExist").style.display = "block";
+            document.getElementById("loginExist").style.display = "none";
+        }
+    </script>
+
+    <div class="row  my-3" style="margin-left: 0%; margin-right: 0%;flex-direction: row;">
+        <h1 class="col-md-12 my-3" id="ProductName" style="text-align: center;"></h1>
+    </div>
+    <div class="row " style="margin-left: 0%; margin-right: 0%;flex-direction: row;">
+        <div class="container card col-md-4 p-1" id="ProductImg"></div>
+        <div class="container col-md-4 " id="ProductImg">
+
+            <div class="row" style="margin-left: 0%; margin-right: 0%;flex-direction: row;">
+                <div class="container card col-md-12 ">
+                    <p id="ProducPrice">Price:</p>
+                </div>
+            </div>
+            <div class="row" style="margin-left: 0%; margin-right: 0%;flex-direction: row;">
+                <div class="container  col-md-12  ">
+                    &nbsp;
+                </div>
+            </div>
+            <div class="row" style="margin-left: 0%; margin-right: 0%;flex-direction: row;">
+                <div class="container card col-md-12 ">
+                    <p id="ProductQuantity">Quantity:</p>
+                </div>
+            </div>
+            <div class="row" style="margin-left: 0%; margin-right: 0%;flex-direction: row;">
+                <div class="container  col-md-12 ">
+                    &nbsp;
+                </div>
+            </div>
+            <div class="row" style="margin-left: 0%; margin-right: 0%;flex-direction: row;">
+                <div class="container card col-md-12 " id="ProductSale">
+                    <p id="SalePercent"> Sale Percent: </p>
+
+                </div>
+            </div>
+            <div class="row" style="margin-left: 0%; margin-right: 0%;flex-direction: row;">
+                <div class="container  col-md-12 ">
+                    &nbsp;
+                </div>
+            </div>
+            <div class="row" style="margin-left: 0%; margin-right: 0%;flex-direction: row;">
+                <div class="container card col-md-12 " id="ProductTotal">
+
+                    <p id="Total">Total Price</p>
+                </div>
+            </div>
+
+            <div class="row" style="margin-left: 0%; margin-right: 0%;flex-direction: row;">
+                <div class="container  col-md-12 ">
+                    &nbsp;
+                </div>
+            </div>
+            <div class="row" id="disabledLogin"  style="text-align: center;margin-left: 0%; margin-right: 0%;flex-direction: row;">
+                <div class="container  col-md-6 " id="addToCard">
+                    <button type="button" id="cardBtn" class="btn btn-success">Add to card</button>
+                </div>
+
+                <div class="container  col-md-6 " id="buy">
+                    <button type="button" id="buyBtn" class="btn btn-primary">Buy</button>
+                </div>
+            </div>
+        </div>
+    </div>
+    </div>
+    <div class="row ">
+
+    </div>
+
+
+    <script>
+
+
+        $(document).ready(function () {
+            
+            var UserID = localStorage.getItem("LoginID");
+            if(UserID==0){
+                $("#disabledLogin").css("display","none")
+            }
+            var ToCardOrNOT = JSON.parse(localStorage.getItem("UserCardProduct" + UserID));
+            var ProductIDValueCard = localStorage.getItem("ProductID");
+
+            if (ToCardOrNOT != null) {
+
+                for (var indexCard = 0; indexCard < ToCardOrNOT.length; indexCard++) {
+                    if (ToCardOrNOT[indexCard].ProductIDValue == ProductIDValueCard) {
+                        $("#cardBtn").attr('disabled', true)
+                        $("#cardBtn").text('Added to card')
+                    }
+                }
+            }
+            $("#cardBtn").click(function () {
+                var ProductIDValue = localStorage.getItem("ProductID");
+                var UserID = localStorage.getItem("LoginID");
+                flagExist = 1;
+                var temp = JSON.parse(localStorage.getItem("UserCardProduct" + UserID)) || [];
+                temp.push({ "ProductIDValue": ProductIDValue, "UserID": UserID });
+
+                localStorage.setItem("UserCardProduct" + UserID, JSON.stringify(temp));
+                $(this).attr('disabled', true)
+                $(this).text('Added to card')
+
+            });
+            $("#buyBtn").on("click", function () {
+                var ProductIDValue = localStorage.getItem("ProductID");
+
+            localStorage.setItem("Buy" +UserID, ProductIDValue)
+            location.href='buyProduct.html';
+
+        });
+
+            var ProductID = localStorage.getItem("ProductID")
+            console.log(ProductID)
+            $.ajax({
+                url: 'Products.json',
+                dataType: 'json',
+                contentType: 'json',
+                type: 'get',
+
+                success: function (res) {
+
+                    var len = res.Products.length, flag = 0;
+                    for (var indexPro = 0; indexPro < len && flag == 0; indexPro++) {
+                        console.log("Product" + res.Products[indexPro].Name)
+                        if (parseInt(ProductID) == parseInt(res.Products[indexPro].id)) {
+                            console.log(res.Products[indexPro].Name)
+                            $("#ProductName").html(res.Products[indexPro].Name);
+                            $("#ProductImg").append("<img id='ProductImgeID'>")
+                            $("#ProductImgeID").attr("src", res.Products[indexPro].img)
+                            $("<span> " + res.Products[indexPro].Price + " LE</span>").appendTo("#ProducPrice");
+                            $("<span> " + res.Products[indexPro].Quantity + "</span>").appendTo("#ProductQuantity");
+                            $("<span> " + res.Products[indexPro].sale + "%</span>").appendTo("#SalePercent");
+
+                            var totalPrice = (parseInt(res.Products[indexPro].Price) - ((parseInt(res.Products[indexPro].Price) * parseInt(res.Products[indexPro].sale)) / 100))
+                            $("<span> " + totalPrice + " LE</span>").appendTo("#Total");
+
+
+
+                            flag = 1;
+                        }
+                        if (parseInt(res.Products[indexPro].Quantity) <= 10) {
+                               
+                                $("#ProductImgeID").css("box-shadow","0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgb(214, 63, 43)");
+                            }
+                    }
+
+                }
+                ,
+                error: function (xhr) {
+                    console.log(xhr)
+                    console.log(xhr.status + xhr.statusText)
+                },
+            });
+        });
+
+    </script>
+</body>
+
+</html>

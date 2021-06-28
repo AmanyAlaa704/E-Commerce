@@ -1,0 +1,285 @@
+{
+    "Products": [
+        {
+            "id":1,
+            "Name": "laptop1",
+            "category":"laptops",
+            "Price": 11000,
+            "img":"img/laptop.jpg",
+            "sale":10,
+            "Quantity":100
+        },
+        {
+            "id":2,
+            "Name": "laptop2",
+            "category":"laptops",
+            "Price": 12000,
+            "img":"img/laptop2.jpg",
+            "sale":5,
+            "Quantity":10
+        },
+        {
+            "id":3,
+            "Name": "laptop3",
+            "category":"laptops",
+            "Price": 13000,
+            "img":"img/laptop3.jpg",
+            "sale":15,
+            "Quantity":19
+        },
+        {
+            "id":4,
+            "Name": "laptop4",
+            "category":"laptops",
+            "Price": 12500,
+            "img":"img/laptop4.jpg",
+            "sale":20,
+            "Quantity":70
+        },
+        {
+            "id":5,
+            "Name": "laptop5",
+            "category":"laptops",
+            "Price": 15000,
+            "img":"img/laptop5.jpg",
+            "sale":7,
+            "Quantity":20
+
+        },
+        {
+            "id":6,
+            "Name": "laptop6",
+            "category":"laptops",
+            "Price": 16000,
+            "img":"img/laptop6.jpg",
+            "sale":27,
+            "Quantity":1
+        },
+        {
+            "id":7,
+            "Name": "laptop7",
+            "category":"laptops",
+            "Price": 17000,
+            "img":"img/laptop7.jpg",
+            "sale":55,
+            "Quantity":2
+        },
+        {
+            "id":8,
+            "Name": "Mobile Phone",
+            "category":"MobilePhone",
+            "Price": 4000,
+            "img":"img/phone1.jpg",
+            "sale":0,
+            "Quantity":30
+        },  {
+            "id":9,
+            "Name": "Mobile Phone2",
+            "category":"MobilePhone",
+            "Price": 5000,
+            "img":"img/phone2.jpeg",
+            "sale":14,
+            "Quantity":8
+        },
+        {
+            "id":10,
+            "Name": "Mobile Phone3",
+            "category":"MobilePhone",
+            "Price": 20000,
+            "img":"img/phone3.png",
+            "sale":5,
+            "Quantity":18
+        },
+        {
+            "id":11,
+            "Name": "Mobile Phone4",
+            "category":"MobilePhone",
+            "Price": 5900,
+            "img":"img/phone4.jpg",
+            "sale":2,
+            "Quantity":10
+        },
+        {
+            "id":12,
+            "Name": "Mobile Phone5",
+            "category":"MobilePhone",
+            "Price": 7320,
+            "img":"img/phone5.png",
+            "sale":15,
+            "Quantity":6
+        },
+        {
+            "id":13,
+            "Name": "Watch",
+            "category":"Watches",
+            "Price": 1000,
+            "img":"img/Watch1.jpg",
+            "sale":10,
+            "Quantity":16
+        } ,
+        {
+            "id":14,
+            "Name": "Watch",
+            "category":"Watches",
+            "Price": 2000,
+            "img":"img/Watch2.jpg",
+            "sale":25,
+            "Quantity":7
+        },
+        {
+            "id":15,
+            "Name": "Television One",
+            "category":"TV",
+            "Price": 7000,
+            "img":"img/TV1.jpg",
+            "sale":30,
+            "Quantity":20
+        },
+        {
+            "id":16,
+            "Name": "Television Two",
+            "category":"TV",
+            "Price": 25000,
+            "img":"img/TV2.jpg",
+            "sale":15,
+            "Quantity":4
+        },{
+            "id":17,
+            "Name": "Television Two",
+            "category":"TV",
+            "Price": 9100,
+            "img":"img/TV3.jpg",
+            "sale":0,
+            "Quantity":40
+        }
+        ,{
+            "id":18,
+            "Name": "Printer One",
+            "category":"Printer",
+            "Price": 2200,
+            "img":"img/printer.jpg",
+            "sale":20,
+            "Quantity":15
+        }
+        ,{
+            "id":19,
+            "Name": "Printer Two",
+            "category":"Printer",
+            "Price": 2000,
+            "img":"img/printer2.jpg",
+            "sale":0,
+            "Quantity":40
+        }
+        ,{
+            "id":20,
+            "Name": "VR One",
+            "category":"VR",
+            "Price": 1820,
+            "img":"img/vr1.jpg",
+            "sale":3,
+            "Quantity":10
+        }
+        ,{
+            "id":21,
+            "Name": "VR Two",
+            "category":"VR",
+            "Price": 2000,
+            "img":"img/vr2.jpg",
+            "sale":13,
+            "Quantity":20
+        }
+        ,{
+            "id":22,
+            "Name": "VR Three",
+            "category":"VR",
+            "Price": 3000,
+            "img":"img/vr3.jpg",
+            "sale":1,
+            "Quantity":60
+        },{
+            "id":23,
+            "Name": "Phone One",
+            "category":"Phone",
+            "Price": 200,
+            "img":"img/telephone.jpeg",
+            "sale":10,
+            "Quantity":100
+        },{
+            "id":24,
+            "Name": "Phone Two",
+            "category":"Phone",
+            "Price": 500,
+            "img":"img/telephone.jpg",
+            "sale":19,
+            "Quantity":100
+        }
+        ,{
+            "id":25,
+            "Name": "Kittle One",
+            "category":"Kittle",
+            "Price": 1050,
+            "img":"img/kittle1.jpg",
+            "sale":19,
+            "Quantity":100
+        } ,{
+            "id":26,
+            "Name": "Kittle Two",
+            "category":"Kittle",
+            "Price": 750,
+            "img":"img/kittle2.jpg",
+            "sale":3,
+            "Quantity":70
+        }
+
+
+    ],
+    "TopProducts": [
+        {
+            "id":1,
+            "Name": "laptop1",
+            "category":"laptops",
+            "Price": 11000,
+            "img":"img/laptop.jpg"
+        },
+        {
+            "id":2,
+            "Name": "Watch",
+            "category":"Watches",
+            "Price": 1000,
+            "img":"img/Watch1.jpg"
+        },
+        {
+            "id":3,
+            "Name": "Mobile Phone",
+            "category":"MobilePhone",
+            "Price": 4000,
+            "img":"img/phone1.jpg"
+        },
+        {
+            "id":4,
+            "Name": "laptop2",
+            "category":"laptops",
+            "Price": 16000,
+            "img":"img/laptop2.jpg"
+        },
+        {
+            "id":5,
+            "Name": "Watch",
+            "category":"Watches",
+            "Price": 2000,
+            "img":"img/Watch2.jpg"
+        },
+        {
+            "id":6,
+            "Name": "Mobile Phone 2",
+            "category":"MobilePhone",
+            "Price": 5000,
+            "img":"img/phone1.jpg"
+        }
+    ]
+
+    ,"searchTabs":
+    ["ALL","TV", "Laptops", "Watches", "Phone", "MobilePhone", "kittle", "VR", "Printer"]
+
+    
+}

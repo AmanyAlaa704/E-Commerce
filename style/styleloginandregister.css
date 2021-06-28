@@ -1,0 +1,154 @@
+body{
+    background-color: #dae1e7 !important;
+    color: #183661;
+    font-weight: bolder;
+    font-size: larger;
+}
+
+h1{
+    color: #dd6b4d;
+    font-weight: bolder;
+    font-size: 60px;
+    font-family:'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif
+}
+h2{
+    color: #1c4b82;
+    font-weight: bolder;
+}
+
+.img {
+    border-radius: 50%;
+}
+
+.input {
+    width: 50%;
+    padding: 12px 20px;
+    margin: 8px 0;                   
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    box-sizing: border-box;
+}
+#Frm1{
+    display: flex;          
+    flex-direction: column;  
+    align-items: center; 
+    margin-top: 7%;
+    width: 80%;
+
+}
+
+.btnSbmit{
+    color: white;
+    background-color: #0275d8;
+    width: 30% fit-content;
+    height: 50px;
+    border: none;
+    opacity: 0.8;
+}
+
+.btnSbmit:hover {
+    opacity: 1;
+  }
+
+.div{
+    position: relative;
+    margin: 8px 0;  
+    left: -15%;
+    
+}
+
+
+#divOverLay {
+    position: fixed;
+    display: none;
+    width: 70%;
+    height: 70%;
+    top: 20%;
+    left: 15%;
+    right: 15%;
+    bottom: 10%;
+    background-image:linear-gradient(to right, rgba(255, 0, 0, 0.13), rgba(255,0,0,1));
+    z-index: 2;
+    cursor: pointer;
+    border-radius: 20%;
+}
+.text{
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    font-size: 50px;
+    color: white;
+    transform: translate(-50%,-50%);
+    -ms-transform: translate(-50%,-50%);
+    
+
+}
+
+.topnav {
+    overflow: hidden;
+    background-color: #333;
+}
+
+.topnav a {
+    float: left;
+    color: #f2f2f2;
+    text-align: center;
+    padding: 14px 16px;
+    text-decoration: none;
+    font-size: 17px;
+}
+
+.topnav a:hover {
+    background-color: #ddd;
+    color: black;
+}
+
+.topnav a.active {
+    background-color: #4CAF50;
+    color: white;
+}
+
+.topnav-right {
+    float: right;
+}
+
+
+
+.ImgCenter {
+    display: block;
+    margin-left: auto;
+    margin-right: auto;
+}
+
+
+.ProductContainer {
+
+    position: relative;
+    text-align: center;
+    color: black;
+    border: 1px black solid;
+    background-color: white;
+    width: 305px;
+    justify-content: center;
+    
+}
+
+
+.CentereName {
+    position: absolute;
+    left: 10%;
+    bottom: -3%;
+    transform: translate(-50%, -50%);
+}
+
+.polaroid {
+    width: 284px;
+    padding: 10px 10px 20px 10px;
+    border: 1px solid #BFBFBF;
+    background-color: white;
+    box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgb(214, 63, 43);}
+
+.rotate_right {
+    float: left;
+    transform: rotate(7deg);
+}

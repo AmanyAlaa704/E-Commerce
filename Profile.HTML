@@ -1,0 +1,333 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.0/umd/popper.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.7.0/css/all.css"
+        integrity="sha384-lZN37f5QGtY3VHgisS14W3ExzMWZxybE1SJSEsQp9S+oqd12jhcu+A56Ebc1zFSJ" crossorigin="anonymous">
+    <link rel="stylesheet" href="style/styleloginandregister.css">
+    <link rel="stylesheet" href="https://code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
+    <script src="https://code.jquery.com/jquery-1.12.4.js"></script>
+    <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
+    <style>
+        #buyBtn,
+        #cardBtn {
+            width: 230PX;
+            margin: 10PX;
+            padding: 10px;
+
+        }
+    </style>
+</head>
+
+<body>
+
+
+    <div class="topnav">
+        <a href="Home.html" style="color: white;"><img width="30px" height="5%" src="img/logo.jpg" class="img">Home</a>
+        <a href="#Card"> <i class="fas fa-shopping-basket"  >Card</i></a>
+        <a href="#contact"></a>
+        <div class="topnav-right" id="loginNotExist" style="display: block;">
+            <a href="Login.html">Sign in</a>
+            <a href="Register.html">Sign Up</a>
+        </div>
+        <div class="topnav-right" id="loginExist" style="display: none;">
+            <button onclick="location.href='Profile.html'" class="btn btn-dark" id="UserName"
+                style="color: white;"></button>
+
+            <button type="button" id="Out" class="btn btn-dark">Sign Out</button>
+        </div>
+        <div style="margin-top: 10px;margin-right: 10px;margin-left: 0%;">
+            <form action="Search.html">
+                <input type="text" placeholder="Search.." name="search" id="autocomplete">
+                <button id="btnSearch" type="submit"><i class="fa fa-search"></i></button>
+            </form>
+        </div>
+
+    </div>
+
+    <script>
+        var LoginORNot = localStorage.getItem("LoginID")
+        
+        if (LoginORNot > 0) {
+            document.getElementById("loginNotExist").style.display = "none";
+            document.getElementById("loginExist").style.display = "block";
+
+            $(document).ready(function () {
+                $("#btnSearch").click(function(){
+                var SearchVal=$("#autocomplete").val();
+                localStorage.setItem("SearchVal",SearchVal);
+            });
+                
+                $("#Out").click(function () {
+
+                    localStorage.setItem("LoginID", 0);
+                    location.href = "Home.html"
+                })
+                $.ajax({
+                    url: 'users.json',
+                    dataType: 'json',
+                    contentType: 'json',
+                    type: 'get',
+
+                    success: function (res) {
+
+                        var len = res.data.length;
+                        var flag = 0;
+
+                        for (var index = 0; index < len && flag == 0; index++) {
+                            if (LoginORNot == res.data[index].id) {
+
+                                $("#UserName").text(res.data[index].first_name);
+
+                            }
+                        }
+
+                    },
+                    error: function (xhr) {
+                        console.log(xhr)
+                        console.log(xhr.status + xhr.statusText)
+                    },
+                });
+            });
+
+        } else {
+            document.getElementById("loginNotExist").style.display = "block";
+            document.getElementById("loginExist").style.display = "none";
+        }
+    </script>
+    <div class="row" id="LoginOrNot" style="text-align: center;margin-left: 0%; margin-right: 0%;flex-direction: row;">
+        <div class="container card my-3 p-3 col-md-3" id="BasicInfoTap">
+            Basic Info
+        </div>
+
+        <div class="container card my-3 p-3 col-md-3" id="OrdersTap">
+            Orders
+        </div>
+        <div class="container card my-3 p-3 col-md-3" id="CardshipTap">
+            Cart Shopping
+        </div>
+    </div>
+
+    <script>
+        
+        $(document).ready(function () {
+            var LoginID = localStorage.getItem("LoginID");
+            if(LoginID==0){
+                $("#LoginOrNot").css("display","none")
+                $("#MainCountainer").css("display","none")
+                
+            }
+           
+            $("#CardshipMain").hide()
+            $("#OrdersMain").hide()
+            $("#BasicInfoMain").show()
+
+            $("#CardshipTap").on("click", function () {
+                $("#CardshipMain").toggle("slow")
+                $("#OrdersMain").slideUp("slow")
+                $("#BasicInfoMain").slideUp("slow")
+            });
+            $("#OrdersTap").on("click", function () {
+                $("#CardshipMain").slideUp("slow")
+                $("#OrdersMain").toggle("slow")
+                $("#BasicInfoMain").slideUp("slow")
+            });
+            $("#BasicInfoTap").on("click", function () {
+                $("#CardshipMain").slideUp("slow")
+                $("#OrdersMain").slideUp("slow")
+                $("#BasicInfoMain").toggle("slow")
+            });
+
+        });
+    </script>
+    <div id="MainCountainer">
+        <div id="CardshipMain" class="container card my-3 p-3"></div>
+        <div id="OrdersMain" class="container card my-3 p-3"></div>
+        <div id="BasicInfoMain" class="container card my-3 p-3"
+            >
+            <div class="row" style="margin-left: 0%; margin-right: 0%;flex-direction: row;">
+                <div id="ImgUserDiv" class="col-md-4 my-2 p-3"
+                    style=" box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 #1c4b82;">
+                    <img id="ImgUser">
+                </div>
+                <div id="UserFullNameDiv" class="col-md-6 my-2 p-3">
+                    <h1 id="UserFullName"></h1>
+                    <h5 id="UserEmail"></h5>
+                    <h6 id="UserPassword"></h6>
+
+                </div>
+
+            </div>
+
+        </div>
+
+    </div>
+    <script>
+
+
+        $(document).ready(function () {
+            $.ajax({
+                url: 'Products.json',
+                dataType: 'json',
+                contentType: 'json',
+                type: 'get',
+                success: function (res) { 
+                    
+                    var USerIDValBuy = localStorage.getItem("LoginID");
+                    var UserBuyProduct = JSON.parse(localStorage.getItem("UserBuyProduct" + USerIDValBuy))
+                    var a = null;
+                    if( UserBuyProduct == a ) {                    
+                        $("#OrdersMain").append("<h1 id='CartEmpty'>Nothing Ordered Yet</h1>")
+                        $("#CartEmpty").css("text-align", "center")
+
+                    }  
+                    
+ 
+                    if (UserBuyProduct != a ) {
+                       
+                        var BuyLeng = UserBuyProduct.length
+                        if(BuyLeng!=0){
+                        for (var indexBuy = 0; indexBuy < BuyLeng; indexBuy++) {
+                            var lenProd2 = res.Products.length;
+                            for (var indexBuyProd = 1; indexBuyProd < lenProd2; indexBuyProd++) {
+                                if (parseInt(UserBuyProduct[indexBuy].ProductIDValue) == parseInt(res.Products[indexBuyProd].id)) {
+                                    $("#OrdersMain").append('<div  class="row" style="margin-left: 0%; margin-right: 0%;flex-direction: row;"><div class="col-md-4 my-3  card container"><img id="imgProdValBUY"></div><div class="col-md-8 my-3  card container" id="NameProdBUY" ></div></div>');
+                                    $("#imgProdValBUY").attr("id", "imgProdValBUY" + indexBuyProd)
+                                    $("#imgProdValBUY" + indexBuyProd).attr("src", res.Products[indexBuyProd].img)
+                                    $("#NameProdBUY").attr("id", "NameProdBUY" + indexBuyProd)                                
+                                    $("#NameProdBUY" + indexBuyProd).css("text-align", "center")
+                                    $("#NameProdBUY" + indexBuyProd).html("<h1>Name:" + res.Products[indexBuyProd].Name + "</h1><br><h4>Real Price:" + res.Products[indexBuyProd].Price + "LE<br><h4>Sale" + res.Products[indexBuyProd].sale + "%<br>Quantity:" + UserBuyProduct[indexBuy].Quantity + "</h4><br><h4>Total Price:"+ (UserBuyProduct[indexBuy].Quantity*(parseInt(res.Products[indexBuyProd].Price) - ((parseInt(res.Products[indexBuyProd].Price) * parseInt(res.Products[indexBuyProd].sale)) / 100))) +" LE</h4>")
+                                    
+                                }
+                            }
+                        }
+                    }
+                    }
+                
+                
+
+
+
+
+
+                    var USerIDVal = localStorage.getItem("LoginID");
+                    localStorage.setItem("Buy" +USerIDVal, "")
+                    var UserCardProduct = JSON.parse(localStorage.getItem("UserCardProduct" + USerIDVal))
+                    if (UserCardProduct != a ) {
+                        console.log(UserCardProduct);
+                        var CardLeng = UserCardProduct.length
+                        for (var indexCard = 0; indexCard < CardLeng; indexCard++) {
+                            var lenProd = res.Products.length;
+                            for (var indexProd = 1; indexProd < lenProd; indexProd++) {
+                                if (parseInt(UserCardProduct[indexCard].ProductIDValue) == parseInt(res.Products[indexProd].id)) {
+                                    $("#CardshipMain").append('<div  id="row" class="row" style="margin-left: 0%; margin-right: 0%;flex-direction: row;"><div class="col-md-4 my-3  card container"><img id="imgProdVal"></div><div class="col-md-8 my-3  card container" id="NameProd" ></div></div>');
+                                    $("#imgProdVal").attr("id", "imgProdVal" + indexProd)
+
+                                    $("#NameProd").attr("id", "NameProd" + indexProd)
+                                    $("#row").attr("id", "row"+  UserCardProduct[indexCard].ProductIDValue)
+                                    $("#NameProd" + indexProd).css("text-align", "center")
+                                    $("#NameProd" + indexProd).html("<h1>Name:" + res.Products[indexProd].Name + "</h1><br><h4>Price:" + res.Products[indexProd].Price + "LE<br>Quantity:" + res.Products[indexProd].Quantity + "</h4>")
+                                    $("#NameProd" + indexProd).append('<button type="button" class="btn btn-danger" style="width:100%"  id=rmvBtn >Remove From Card</button>')
+                                    $("#NameProd" + indexProd).append('<button type="button" class="btn btn-primary" style="width:100%" id=buyBtn >Buy</button>')
+                                    $("#rmvBtn").attr("id", "rmvBtn" + indexProd)
+                                    $("#buyBtn").attr("id", "buyBtn" + indexProd)
+                                    $("#rmvBtn" + indexProd).attr("value", UserCardProduct[indexCard].ProductIDValue)
+                                    $("#buyBtn" + indexProd).attr("value", UserCardProduct[indexCard].ProductIDValue)
+
+
+                                    $("#imgProdVal" + indexProd).attr("src", res.Products[indexProd].img)
+                                    $("#buyBtn" + indexProd).on("click", function () {
+                                        var ProductIDBuy = $(this).attr("value");
+
+                                        localStorage.setItem("Buy" +USerIDVal, ProductIDBuy)
+                                      location.href='buyProduct.html';
+
+                                    });
+                                    $("#rmvBtn" + indexProd).on("click", function () {
+                                        var temp = JSON.parse(localStorage.getItem("UserCardProduct" + USerIDVal)) || [];
+                                    
+                                        var removedId = $(this).attr("value");
+                                        var deleteFromList = function (removedId, temp) {
+                                            for (var i in temp) {
+                                                if (temp[i].ProductIDValue===removedId) {
+                                                    temp.splice(i, 1);
+                                                }
+                                            }
+                                            return temp;
+                                        };
+
+                                       
+                                            var todoList = deleteFromList(removedId, temp);
+                                            localStorage.setItem("UserCardProduct" + USerIDVal, JSON.stringify(todoList))
+                                            $("#row"+removedId).css("display","none")
+                                            console.log(temp.length);
+                                        
+                                    
+                                    });
+                                }
+
+                            }
+
+                        }
+                    }
+                    if( UserCardProduct == a) {                    
+                        $("#CardshipMain").append("<h1 id='CartEmpty'>Nothing in Card</h1>")
+                        $("#CartEmpty").css("text-align", "center")
+
+                    }  
+                }
+
+
+
+                , error: function (xhr) {
+                    console.log(xhr)
+                    console.log(xhr.status + xhr.statusText)
+                }
+
+
+
+            });
+
+
+            $.ajax({
+                url: 'users.json',
+                dataType: 'json',
+                contentType: 'json',
+                type: 'get',
+                success: function (res) {
+                    var len = res.data.length;
+                    var USerID = localStorage.getItem("LoginID");
+                    for (var index = 0; index < len; index++) {
+                        if (parseInt(USerID) == parseInt(res.data[index].id)) {
+                            $("#ImgUser").attr("src", res.data[index].avatar)
+                            $("#ImgUser").addClass("ImgCenter")
+                            $("#UserFullName").text(res.data[index].first_name + " " + res.data[index].last_name)
+                            $("#UserEmail").text(res.data[index].email)
+                            $("#UserPassword").text(res.data[index].Pass)
+
+                        }
+                    }
+
+                },
+                error: function (xhr) {
+                    console.log(xhr)
+                    console.log(xhr.status + xhr.statusText)
+                },
+
+
+            });
+        });
+
+
+
+    </script>
+   
+</body>
+
+</html>

@@ -1,0 +1,246 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.0/umd/popper.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.7.0/css/all.css"
+        integrity="sha384-lZN37f5QGtY3VHgisS14W3ExzMWZxybE1SJSEsQp9S+oqd12jhcu+A56Ebc1zFSJ" crossorigin="anonymous">
+    <link rel="stylesheet" href="style/styleloginandregister.css">
+    <link rel="stylesheet" href="https://code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
+    <script src="https://code.jquery.com/jquery-1.12.4.js"></script>
+    <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
+
+</head>
+
+<body>
+    <div class="topnav">
+        <a href="Home.html" style="color: white;"><img width="30px" height="5%" src="img/logo.jpg" class="img">Home</a>
+        <a href="Profile.HTML"> <i class="fas fa-shopping-basket" id="CardshipTap">Card</i></a>
+        <a href="#contact"></a>
+        <div class="topnav-right" id="loginNotExist" style="display: block;">
+            <a href="Login.html">Sign in</a>
+            <a href="Register.html">Sign Up</a>
+        </div>
+        <div class="topnav-right" id="loginExist" style="display: none;">
+            <button onclick="location.href='Profile.html'" class="btn btn-dark" id="UserName"
+                style="color: white;"></button>
+
+            <button type="button" id="Out" class="btn btn-dark">Sign Out</button>
+        </div>
+        <div style="margin-top: 10px;margin-right: 10px;margin-left: 0%;">
+            <form action="Search.html">
+                <input type="text" placeholder="Search.." name="search" id="autocomplete">
+                <button id="btnSearch" type="submit"><i class="fa fa-search"></i></button>
+            </form>
+        </div>
+    </div>
+    <script>
+        var LoginORNot = localStorage.getItem("LoginID")
+        if (LoginORNot > 0) {
+            document.getElementById("loginNotExist").style.display = "none";
+            document.getElementById("loginExist").style.display = "block";
+
+            $(document).ready(function () {
+                $("#Out").click(function () {
+
+                    localStorage.setItem("LoginID", 0);
+                    location.href = "Home.html"
+                });
+                $.ajax({
+                    url: 'users.json',
+                    dataType: 'json',
+                    contentType: 'json',
+                    type: 'get',
+
+                    success: function (res) {
+
+                        var len = res.data.length;
+                        var flag = 0;
+
+                        for (var index = 0; index < len && flag == 0; index++) {
+                            if (LoginORNot == res.data[index].id) {
+
+                                $("#UserName").text(res.data[index].first_name);
+                            }
+                        }
+
+                    },
+                    error: function (xhr) {
+                        console.log(xhr)
+                        console.log(xhr.status + xhr.statusText)
+                    },
+                });
+
+            });
+
+        } else {
+            document.getElementById("loginNotExist").style.display = "block";
+            document.getElementById("loginExist").style.display = "none";
+        }
+        $(document).ready(function () {
+            var autocompleteValue = localStorage.getItem("SearchVal")
+            $("#autocomplete").val(autocompleteValue);
+
+        });
+
+    </script>
+
+    <div id="taps" class="row" style="background-color: black;color: blanchedalmond;margin-left:0%;margin-right: 0%;">
+    </div>
+
+    <script>
+        $(document).ready(function () {
+            $.ajax({
+                url: 'products.json',
+                dataType: 'json',
+                contentType: 'json',
+                type: 'get',
+
+                success: function (res) {
+                    for (var indexTabs = 0; indexTabs < res.searchTabs.length; indexTabs++) {
+                        $('<div id="col"> </div>').appendTo("#taps");
+                        $('#col').attr("id", "col" + indexTabs)
+                        $("#col" + indexTabs).addClass("container  col-md-1 my-1 p-1")
+                        $("#col" + indexTabs).text(res.searchTabs[indexTabs])
+                        $("#col" + indexTabs).css('flex-direction', 'column')
+                        $("#col" + indexTabs).on("click", function () {
+                            console.log($(this).text());
+
+                            localStorage.setItem("SelectedValue", $(this).text());
+                            localStorage.setItem("SearchVal", $(this).text());
+                            $("#autocomplete").val($(this).text());
+
+
+
+                            location.href = 'Search.html';
+                        });
+                        $("#autocomplete").attr('disabled', true)
+
+                    }
+                }
+            });
+        });
+    </script>
+
+
+    <div id="ItemsContainer">
+
+    </div>
+
+    <script>
+        $(document).ready(function () {
+            $.ajax({
+                url: 'products.json',
+                dataType: 'json',
+                contentType: 'json',
+                type: 'get',
+
+                success: function (res) {
+                    var colCount = 0, rowCount = 0;
+                    var SeacrValueCmp = localStorage.getItem("SearchVal").toLowerCase();
+                    for (var indexCol = 0; indexCol < res.Products.length; indexCol++) {
+
+                        var SeacrhIndexCmp = res.Products[indexCol].category.toLowerCase();
+
+                        if (SeacrhIndexCmp == SeacrValueCmp && colCount < 3) {
+                            if (colCount == 0) {
+                                $("#ItemsContainer").append('<div id="rowN" class="row" style="margin-left: 0%; margin-right: 0%;flex-direction: row;"> </div>')
+                                $('#rowN').attr('id', 'rowN' + rowCount)
+
+                            }
+
+                            $('#rowN' + rowCount).append('<div id="colN" class="container card col-md-3 my-3 p-3"><img src="" id="imgCol" /><h5 id="ProName" ><h5> </div>');
+                            $("#colN").attr("id", "colN" + indexCol)
+                            $("#imgCol").attr("id", "imgCol" + indexCol);
+                            $("#ProName").attr("id", "ProName" + indexCol);
+
+                            $("#imgCol" + indexCol).attr("src", res.Products[indexCol].img);
+                            $("#imgCol" + indexCol).on("click", function () {
+
+                                var srcValue = $(this).attr('src');
+                                for (var indexImg = 0; indexImg < res.Products.length; indexImg++) {
+                                    if (srcValue == res.Products[indexImg].img) {
+                                        localStorage.setItem("ProductID", parseInt(res.Products[indexImg].id));
+                                        location.href = "Products.html";
+                                    }
+                                }
+                            });
+
+
+                            $("#ProName" + indexCol).css("text-align", "center")
+                            $("#ProName" + indexCol).html(res.Products[indexCol].Name)
+                            if (res.Products[indexCol].Quantity <= 10) {
+
+                                $("#imgCol" + indexCol).css("box-shadow", "0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgb(214, 63, 43)");
+                                $("#ProName" + indexCol).append("<br> Quantity" + res.Products[indexCol].Quantity)
+                                $("#ProName" + indexCol).css({ "margin": "10px", "padding": "10px" })
+                            }
+
+
+                            colCount = colCount + 1;
+
+                            if (colCount == 3) {
+                                colCount = 0
+                                rowCount = rowCount + 1
+                            }
+
+
+
+                        }
+                        if (SeacrValueCmp == "all") {
+                            if (colCount == 0) {
+                                $("#ItemsContainer").append('<div id="rowN" class="row" style="margin-left: 0%; margin-right: 0%;flex-direction: row;"> </div>')
+                                $('#rowN').attr('id', 'rowN' + rowCount)
+
+
+                            }
+
+                            $('#rowN' + rowCount).append('<div id="colN" class="container card col-md-3 my-3 p-3"> <img src="" id="imgCol" /> <h5 id="ProName" ><h5> </div>');
+                            $("#colN").attr("id", "colN" + indexCol)
+                            $("#imgCol").attr("id", "imgCol" + indexCol);
+                            $("#ProName").attr("id", "ProName" + indexCol);
+
+                            $("#imgCol" + indexCol).attr("src", res.Products[indexCol].img);
+                            $("#ProName" + indexCol).css("text-align", "center")
+                            $("#ProName" + indexCol).html(res.Products[indexCol].Name)
+                            if (res.Products[indexCol].Quantity <= 10) {
+
+                                $("#imgCol" + indexCol).css("box-shadow", "0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgb(214, 63, 43)");
+                                $("#ProName" + indexCol).append("<br> Quantity" + res.Products[indexCol].Quantity)
+                                $("#ProName" + indexCol).css({ "margin": "10px", "padding": "10px" })
+                            }
+                            $("#imgCol" + indexCol).on("click", function () {
+
+                                var srcValue = $(this).attr('src');
+                                for (var indexImg = 0; indexImg < res.Products.length; indexImg++) {
+                                    if (srcValue == res.Products[indexImg].img) {
+                                        localStorage.setItem("ProductID", parseInt(res.Products[indexImg].id));
+                                        location.href = "Products.html";
+                                    }
+                                }
+                            });
+
+                            colCount = colCount + 1;
+
+                            if (colCount == 3) {
+                                colCount = 0
+                                rowCount = rowCount + 1
+                            }
+
+                        }
+
+                    }
+                }
+
+            });
+        });
+    </script>
+
+</body>
+
+</html>
